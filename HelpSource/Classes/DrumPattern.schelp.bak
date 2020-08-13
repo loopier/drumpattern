@@ -1,0 +1,71 @@
+CLASS:: DrumPattern
+summary:: represents a drum machine pattern
+categories:: Math
+related:: 
+
+DESCRIPTION::
+DrumPattern supports arbitrary rhythmic patterns, and can generate rhythimc information in various ways, including as input to Patterns.
+
+code::
+s.boot;
+
+a = DrumPattern.house;
+a.kick; // [ 1, r, r, r, 1, r, r, r, 1, r, r, r, 1, r, r, r ]
+a.sn; // [ r, r, r, r, 1, r, r, r, r, r, r, r, 1, r, r, r ]
+a.oh; // [ r, r, 1, r, r, r, 1, r, r, r, 1, r, r, r, 1, r ] ]
+a.cym; // [ 1, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r ] ]
+
+TempoClock.default.tempo = 142/60;
+Pbind(\dur, 1/4, \octave, 3, \rhythm, Pseq(a.kick,inf)).play;
+Pbind(\dur, 1/4, \octave, 5, \rhythm, Pseq(a.sn,inf)).play;
+Pbind(\dur, 1/4, \octave, 4, \rhythm, Pseq(a.oh,inf)).play;
+Pbind(\dur, 1/4, \octave, 7, \rhythm, Pseq(a.cym,inf)).play;
+::
+
+For a complete list of available scales, execute
+code::
+Scale.directory
+::
+
+CLASSMETHODS::
+
+METHOD:: all
+The drum pattern repository, to which new patterns can be added.
+
+code::
+DrumPattern.all.put(\catastrophic, DrumPattern(kick:[1,9], sn: [5,13]));
+DrumPattern.at(\catastrophic).kick; // access to the drum pattern
+::
+
+METHOD:: at
+Access from the drum pattern repository.
+code::
+DrumPattern.at(\house);
+DrumPattern.newFromKey(\house); // access a copy of the scale for modification
+::
+
+METHOD:: new
+Creates a new DrumPattern from scratch.  Patterns are created with arrays of Integers denoting beat positions where each instrument of the drum kit should hit.
+
+ARGUMENT:: kick, sn, ch, oh, rim, cym, bell, cl, sh, ht, mt, lt
+Array of Integers representing the pattern for each instrument in the drum kit.
+code::
+// set kick pattern to hit on beats 1 and 9
+d = DrumPattern(kick:[1,9]);
+d.kick; // [ 1, r, r, r, r, r, r, r, 1, r, r, r, r, r, r, r ]  
+::
+
+ARGUMENT:: size
+Number of beats in the pattern. Pattern lengths are 16 beats long by default.
+::code
+d = DrumPattern(kick:[1,5], size:8); 
+d.kick; // [ 1, r, r, r, 1, r, r, r ]
+::
+
+INSTANCEMETHODS::
+
+
+EXAMPLES::
+
+code::
+::
