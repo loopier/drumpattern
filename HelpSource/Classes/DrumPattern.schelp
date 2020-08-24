@@ -24,7 +24,7 @@ Pbind(\dur, 1/4, \octave, 7, \rhythm, Pseq(a.cym,inf)).play;
 
 For a complete list of available patterns, execute
 code::
-Scale.directory
+DrumPattern.directory
 ::
 
 CLASSMETHODS::
