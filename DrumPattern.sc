@@ -72,6 +72,21 @@ DrumPattern {
 		^pattern.at(key);
 	}
 
+	// converts an array of 1's and \r's to an array of \durs
+	*asDurs {  arg pat;
+		var durs = List();
+		var positions = pat.asString.replace(",", "").replace("[","").replace("]","").replace(" ","").findAll("1");
+		positions.do{|x,i|
+			if(i < (positions.size - 1)) {
+				durs.add(positions[i + 1] - x);
+			} {
+				durs.add(pat.size - x);
+			}
+		};
+		pat.debug("pattern");
+		durs.debug("durs");
+	}
+
 // the patterns
 
 	*initClass {
@@ -338,6 +353,10 @@ DrumPattern {
             // rim: [5,8,12],
             // size: 12,
         ),
+		\lentejas -> DrumPattern(
+            kick: [1,2,4,5,8,9,10,11,12],
+			sn: [3,6,13],
+        ),
         // template
         // \patternname -> DrumPattern(
         //     kick: [0],
@@ -356,5 +375,11 @@ DrumPattern {
 		];
 
 		// all = all.freezeAsParent;
+	}
+}
+
++Array {
+	asDurs {
+		^DrumPattern.asDurs(this);
 	}
 }
