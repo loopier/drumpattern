@@ -57,21 +57,6 @@ DrumPattern {
         ^arr;
     }
 
-	newFromKey { |key|
-		var pattern = this.pattern.at(key).deepCopy;
-		pattern ?? { ("Unknown pattern " ++ key.asString).warn; ^nil };
-		^pattern;
-	}
-
-	doesNotUnderstand { |selector, args|
-		var pattern = this.newFromKey(selector, args).deepCopy;
-		^pattern ?? { super.doesNotUnderstand(selector, args) };
-	}
-
-	at { arg key;
-		^pattern.at(key);
-	}
-
 	// converts an array of 1's and \r's to an array of \durs
 	*asDurs {  arg pat;
 		var durs = List();
@@ -85,6 +70,21 @@ DrumPattern {
 		};
 		pat.debug("pattern");
 		durs.debug("durs");
+	}
+
+	newFromKey { |key|
+		var pattern = this.pattern.at(key).deepCopy;
+		pattern ?? { ("Unknown pattern " ++ key.asString).warn; ^nil };
+		^pattern;
+	}
+
+	doesNotUnderstand { |selector, args|
+		var pattern = this.newFromKey(selector, args).deepCopy;
+		^pattern ?? { super.doesNotUnderstand(selector, args) };
+	}
+
+	at { arg key;
+		^pattern.at(key);
 	}
 
 // the patterns
