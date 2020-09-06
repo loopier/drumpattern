@@ -3,9 +3,10 @@ DrumPattern {
 	// var <>kick, <>sn, <>ch, <>oh, <>rim, <>cym, <>bell, <>cl, <>sh, <>ht, <>mt, <>lt, <>acc;
     var <>pattern;
 
+	// set patterns with arrays of hit positions [1,3] == [1, \r, 4, \r]
     *new { arg kick=[], sn=[], ch=[], oh=[], rim=[], cym=[], bell=[], cl=[], sh=[], ht=[], mt=[], lt=[], acc=[], size=16;
 		var pat = (
-            kick: DrumPattern.asArray(kick, size),
+			kick: DrumPattern.asArray(kick, size),
             sn: DrumPattern.asArray(sn, size),
             ch: DrumPattern.asArray(ch, size),
             oh: DrumPattern.asArray(oh, size),
@@ -17,6 +18,27 @@ DrumPattern {
             ht: DrumPattern.asArray(ht, size),
             mt: DrumPattern.asArray(mt, size),
             lt: DrumPattern.asArray(lt, size),
+			acc: DrumPattern.asArray(acc, size);
+		);
+		^super.newCopyArgs(pat);
+    }
+
+	// set patterns as arrays of 1's and \r's
+    *with { arg kick=[], sn=[], ch=[], oh=[], rim=[], cym=[], bell=[], cl=[], sh=[], ht=[], mt=[], lt=[], acc=[];
+		var pat = (
+            kick: kick,
+            sn: sn,
+            ch: ch,
+            oh: oh,
+            rim: rim,
+            cym: cym,
+            bell: bell,
+            cl: cl,
+            sh: sh,
+            ht: ht,
+            mt: mt,
+            lt: lt,
+			acc: acc,
 		);
 		^super.newCopyArgs(pat);
     }
@@ -72,6 +94,32 @@ DrumPattern {
 		durs.debug("durs");
 	}
 
+	*fromString { arg str, kick="_", sn=".", ch="x", oh="o", rim="r", cym="z", bell="b", cl="c", sh="h", ht="t", mt="m", lt="l", rest=" ", acc="[A-Z]";
+		var drumpat = DrumPattern(
+			kick: str.toLower.findAllRegexp(kick) + 1,
+			sn: str.toLower.findAllRegexp(sn) + 1,
+			ch: str.toLower.findAllRegexp(ch) + 1,
+			oh: str.toLower.findAllRegexp(oh) + 1,
+			rim: str.toLower.findAllRegexp(rim) + 1,
+			cym: str.toLower.findAllRegexp(cym) + 1,
+			bell: str.toLower.findAllRegexp(bell) + 1,
+			cl: str.toLower.findAllRegexp(cl) + 1,
+			sh: str.toLower.findAllRegexp(sh) + 1,
+			ht: str.toLower.findAllRegexp(ht) + 1,
+			mt: str.toLower.findAllRegexp(mt) + 1,
+			lt: str.toLower.findAllRegexp(lt) + 1,
+			acc: str.toLower.findAllRegexp(acc) + 1,
+			size: str.size,
+		);
+
+		// drumpat.print;
+		^drumpat;
+	}
+
+	print {
+		this.pattern.keysValuesDo{|k, v| v.debug(k)};
+	}
+
 	newFromKey { |key|
 		var pattern = this.pattern.at(key).deepCopy;
 		pattern ?? { ("Unknown pattern " ++ key.asString).warn; ^nil };
@@ -85,6 +133,22 @@ DrumPattern {
 
 	at { arg key;
 		^pattern.at(key);
+	}
+
+	fromString { arg str, kick="_", sn=".", ch="x", oh="o", rim="r", cym="z", bell="b", cl="c", sh="h", ht="t", mt="m", lt="l", rest=" ", acc="[A-Z]";
+		this.pattern.kick = DrumPattern.asArray(str.toLower.findAllRegexp(kick) + 1, size: str.size);
+		this.pattern.sn = DrumPattern.asArray(str.toLower.findAllRegexp(sn) + 1, size: str.size);
+		this.pattern.ch = DrumPattern.asArray(str.toLower.findAllRegexp(ch) + 1, size: str.size);
+		this.pattern.oh = DrumPattern.asArray(str.toLower.findAllRegexp(oh) + 1, size: str.size);
+		this.pattern.rim = DrumPattern.asArray(str.toLower.findAllRegexp(rim) + 1, size: str.size);
+		this.pattern.cym = DrumPattern.asArray(str.toLower.findAllRegexp(cym) + 1, size: str.size);
+		this.pattern.bell = DrumPattern.asArray(str.toLower.findAllRegexp(bell) + 1, size: str.size);
+		this.pattern.cl = DrumPattern.asArray(str.toLower.findAllRegexp(cl) + 1, size: str.size);
+		this.pattern.sh = DrumPattern.asArray(str.toLower.findAllRegexp(sh) + 1, size: str.size);
+		this.pattern.ht = DrumPattern.asArray(str.toLower.findAllRegexp(ht) + 1, size: str.size);
+		this.pattern.mt = DrumPattern.asArray(str.toLower.findAllRegexp(mt) + 1, size: str.size);
+		this.pattern.lt = DrumPattern.asArray(str.toLower.findAllRegexp(lt) + 1, size: str.size);
+		this.pattern.acc = DrumPattern.asArray(str.toLower.findAllRegexp(oh) + 1, size: str.size);
 	}
 
 // the patterns
