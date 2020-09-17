@@ -418,8 +418,11 @@ DrumPattern {
             // size: 12,
         ),
 		\lentejas -> DrumPattern(
-            kick: [1,2,4,5,8,9,10,11,12],
-			sn: [3,6,13],
+            kick: [1,3,9,11,17,19,25,27],
+			sn: [5,13,21,23,29],
+			ch:	(1..8)*4,
+			acc: [3,13,23,29],
+			size: 32,
         ),
         // template
         // \patternname -> DrumPattern(
