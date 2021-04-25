@@ -116,7 +116,7 @@ DrumPattern {
 		^drumpat;
 	}
 
-	print {
+	postln {
 		this.pattern.keysValuesDo{|k, v| v.debug(k)};
 	}
 
