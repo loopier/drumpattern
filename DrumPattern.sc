@@ -4,40 +4,131 @@ DrumPattern {
     var <>pattern;
 
 	// set patterns with arrays of hit positions [1,3] == [1, \r, 4, \r]
-    *new { arg kick=[], sn=[], ch=[], oh=[], rim=[], cym=[], bell=[], cl=[], sh=[], ht=[], mt=[], lt=[], acc=[], size=16;
+	*new { arg
+		kick=[],
+		sn=[],
+		sne=[],
+		ch=[],
+		ph=[],
+		oh=[],
+		soh=[],
+		rim=[],
+		cym=[],
+		cym1=[],
+		cym1ck=[],
+		cym2=[],
+		cym2ck=[],
+		cym3=[],
+		bell=[],
+		rs=[],
+		rt=[],
+		rck=[],
+		rbl=[],
+		spl=[],
+		cl=[],
+		tb=[],
+		sh=[],
+		ht=[],
+		hte=[],
+		mt=[],
+		lt=[],
+		lte=[],
+		acc=[],
+		size=16;
 		var pat = (
 			kick: DrumPattern.asArray(kick, size),
-            sn: DrumPattern.asArray(sn, size),
-            ch: DrumPattern.asArray(ch, size),
-            oh: DrumPattern.asArray(oh, size),
-            rim: DrumPattern.asArray(rim, size),
-            cym: DrumPattern.asArray(cym, size),
-            bell: DrumPattern.asArray(bell, size),
-            cl: DrumPattern.asArray(cl, size),
-            sh: DrumPattern.asArray(sh, size),
-            ht: DrumPattern.asArray(ht, size),
-            mt: DrumPattern.asArray(mt, size),
-            lt: DrumPattern.asArray(lt, size),
-			acc: DrumPattern.asArray(acc, size);
+			sn: DrumPattern.asArray(sn, size),
+			sne: DrumPattern.asArray(sne, size), // snare edge
+			ch: DrumPattern.asArray(ch, size),
+			ph: DrumPattern.asArray(ph, size), // pedal hihat
+			oh: DrumPattern.asArray(oh, size),
+			soh: DrumPattern.asArray(soh, size), // semi-open hihat
+			rim: DrumPattern.asArray(rim, size),
+			cym: DrumPattern.asArray(cym, size),
+			cym1: DrumPattern.asArray(cym1, size),
+			cym1ck: DrumPattern.asArray(cym1, size), // cymbal 1 choked
+			cym2: DrumPattern.asArray(cym2, size),
+			cym2ck: DrumPattern.asArray(cym2, size), // cymbal 2 choked
+			cym3: DrumPattern.asArray(cym3, size),
+			bell: DrumPattern.asArray(bell, size),
+			rs: DrumPattern.asArray(rs, size), // ride cymbal shank
+			rt: DrumPattern.asArray(rt, size), // ride cymbal tip
+			rck: DrumPattern.asArray(rck, size), // ride cymbal choked
+			rbl: DrumPattern.asArray(rbl, size), // ride cymbal bell
+			spl: DrumPattern.asArray(spl, size), // splach cym
+			cl: DrumPattern.asArray(cl, size), // clap
+			tb: DrumPattern.asArray(tb, size), // tambourine
+			sh: DrumPattern.asArray(sh, size), // shaker - maraca
+			ht: DrumPattern.asArray(ht, size), // high tom
+			hte: DrumPattern.asArray(hte, size), // high tom edge
+			mt: DrumPattern.asArray(mt, size), // mid tom
+			lt: DrumPattern.asArray(lt, size), // low tom
+			lte: DrumPattern.asArray(lte, size), // low tom edge
+			acc: DrumPattern.asArray(acc, size); // accent
 		);
 		^super.newCopyArgs(pat);
     }
 
 	// set patterns as arrays of 1's and \r's
-    *with { arg kick=[], sn=[], ch=[], oh=[], rim=[], cym=[], bell=[], cl=[], sh=[], ht=[], mt=[], lt=[], acc=[];
+    *with { arg
+		kick=[],
+		sn=[],
+		sne=[],
+		ch=[],
+		ph=[],
+		oh=[],
+		soh=[],
+		rim=[],
+		cym=[],
+		cym1=[],
+		cym1ck=[],
+		cym2=[],
+		cym2ck=[],
+		cym3=[],
+		bell=[],
+		rs=[],
+		rt=[],
+		rck=[],
+		rbl=[],
+		spl=[],
+		cl=[],
+		tb=[],
+		sh=[],
+		ht=[],
+		hte=[],
+		mt=[],
+		lt=[],
+		lte=[],
+		acc=[];
 		var pat = (
-            kick: kick,
-            sn: sn,
-            ch: ch,
-            oh: oh,
-            rim: rim,
-            cym: cym,
-            bell: bell,
-            cl: cl,
-            sh: sh,
-            ht: ht,
-            mt: mt,
-            lt: lt,
+			kick: kick,
+			sn: sn,
+			sne: sne,
+			ch: ch,
+			ph: ph,
+			oh: oh,
+			soh: soh,
+			rim: rim,
+			cym: cym,
+			cym1: cym1,
+			cym1ck: cym1ck,
+			cym2: cym2,
+			cym2ck: cym2ck,
+			cym3: cym3,
+			bell: bell,
+			rs: rs,
+			rt: rt,
+			rck: rck,
+			rbl: rbl,
+			spl: spl,
+			cl: cl,
+			tb: tb,
+			sh: sh,
+			ht: ht,
+			hte: hte,
+			mt: mt,
+			lt: lt,
+			lte: lte,
 			acc: acc,
 		);
 		^super.newCopyArgs(pat);
