@@ -79,6 +79,12 @@ DrumPattern {
         ^arr;
     }
 
+	// load patterns into ~variables with the same name
+	// TODO: if no pattern list is provided, all the patterns are loaded
+	*asCurrentEnvironmentVariables {
+		DrumPattern.directory.do{|k| currentEnvironment[k] = DrumPattern.all[k]};
+	}
+
 	// converts an array of 1's and \r's to an array of \durs
 	*asDurs {  arg pat;
 		var durs = List();
@@ -414,8 +420,8 @@ DrumPattern {
 			sn: [1,2,4,5,7,11],
             // ch: [1,2,4,5,7,8,10,11,13,14,16,17,19,20,22,23,25,26,28,29,31,32,34,35],
             // oh: [3,6,9,12,15,18,21,24,27,30,33,36],
-            // cl: [3,6,8,10,12]*3,
-            // rim: [3,6,8,10,12]*3,
+            cl: [3,7,8,10,12],
+            rim: [1,2,9,11],
             size: 12,
         ),
         \solea -> DrumPattern(
