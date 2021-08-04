@@ -104,6 +104,11 @@ Drums : Pdef {
 		this.source = this.patterns <> this.instrument;
 	}
 
+	// Map all methods that are not understood to a Pbind parameter.
+	doesNotUnderstand { |selector ...args|
+		this.set(selector, args[0]);
+	}
+
 	set { | ...pairs |
 		this.pairs = this.pairs ? [\r, 1];
 		// replace repeated values, add new ones
@@ -146,6 +151,7 @@ Drums : Pdef {
 			Pdef(\lt, Pbind(\note, lt + Pseq(pat.lt.replace(1,0), inf))),
 		]);
 		this.set();
+		^this;
 	}
 
 	setinstrument { |instrument|
@@ -179,4 +185,5 @@ Drums : Pdef {
 			Pdef(item).source = Pset(\r, 1, Pdef(item).source);
 		}
 	}
+
 }
