@@ -549,10 +549,10 @@ DrumPattern {
 			size: 36,
         ),
         \motorik -> DrumPattern(
-            kick: [1,2,4],
-            sn: [3],
-            ch: [1,2,3,4],
-			size: 4,
+            kick: [1,2,4] * 2,
+            sn: [3] * 2,
+            ch: [1,2,3,4] * 2,
+			size: 8,
         ),
         // template
         // \patternname -> DrumPattern(
